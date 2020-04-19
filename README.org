@@ -1,0 +1,76 @@
+* Introducing LRuby
+Logging Ruby - The Ruby alias for the forgetful scripter
+
+Only Feature:
+No more scrolling through your terminal...
+Logs the output of a script to the script itself!
+* Installation
+First, clone the repo on your local machine.
+
+Create an alias for =lruby= like this:
+
+#+begin_src sh
+alias lruby="ruby -r /path-to-your-lruby/lruby.rb"
+#+end_src
+
+Check that the alias exists by calling =which lruby= in your terminal.
+
+Once =lruby= is available, you can call your Ruby scripts with =lruby= instead of =ruby=.
+* Example: Hello World
+Let's take a look at =./examples/hello_world.rb=.
+
+#+begin_src sh :results raw
+cat ./examples/hello_world.rb
+#+end_src
+
+It is a very simple ruby script that writes "Hello world" and the current time using =puts=.
+
+#+RESULTS:
+puts "Hello world! It is #{Time.now.strftime('%H:%m:%S')}"
+
+As expected when calling it with Ruby...
+
+#+begin_src sh :results raw
+ruby ./examples/hello_world.rb
+#+end_src
+
+...it will do exactly that.
+
+#+RESULTS:
+Hello world! It is 13:04:26
+
+Now let's use =lruby= to call the script:
+
+#+begin_src sh :results raw
+lruby ./examples/hello_world.rb
+#+end_src
+
+Again, the output is the same:
+
+#+RESULTS:
+Hello world! It is 13:05:04
+
+But when looking at the source file:
+
+#+begin_src sh :results raw
+cat ./examples/hello_world.rb
+#+end_src
+
+You will realize that the output of the last call has been logged to the script itself.
+
+#+RESULTS:
+puts "Hello world! It is #{Time.now.strftime('%H:%m:%S')}"
+__END__
+----- [2020-04-19T13:05:04+0200] RESULTS -----
+Hello world! It is 13:05:04
+
+But don't worry! It is still a valid Ruby file and can still be called with the normal Ruby interpreter:
+
+#+begin_src sh :results raw
+ruby ./examples/hello_world.rb
+#+end_src
+
+And will still just produce the expected output.
+
+#+RESULTS:
+Hello world! It is 13:05:50
