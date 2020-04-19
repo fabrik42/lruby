@@ -19,7 +19,7 @@ Once =lruby= is available, you can call your Ruby scripts with =lruby= instead o
 * Example: Hello World
 Let's take a look at =./examples/hello_world.rb=.
 
-#+begin_src sh :results raw
+#+begin_src sh :results raw :exports both
 cat ./examples/hello_world.rb
 #+end_src
 
@@ -36,8 +36,9 @@ ruby ./examples/hello_world.rb
 
 ...it will do exactly that.
 
-#+RESULTS:
+#+begin_src sh
 Hello world! It is 13:04:26
+#+end_src
 
 Now let's use =lruby= to call the script:
 
@@ -47,8 +48,9 @@ lruby ./examples/hello_world.rb
 
 Again, the output is the same:
 
-#+RESULTS:
+#+begin_src sh
 Hello world! It is 13:05:04
+#+end_src
 
 But when looking at the source file:
 
@@ -58,11 +60,12 @@ cat ./examples/hello_world.rb
 
 You will realize that the output of the last call has been logged to the script itself.
 
-#+RESULTS:
+#+begin_src sh
 puts "Hello world! It is #{Time.now.strftime('%H:%m:%S')}"
 __END__
 ----- [2020-04-19T13:05:04+0200] RESULTS -----
 Hello world! It is 13:05:04
+#+end_src
 
 But don't worry! It is still a valid Ruby file and can still be called with the normal Ruby interpreter:
 
@@ -72,5 +75,6 @@ ruby ./examples/hello_world.rb
 
 And will still just produce the expected output.
 
-#+RESULTS:
+#+begin_src sh
 Hello world! It is 13:05:50
+#+end_src
